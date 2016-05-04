@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<title>10</title>
+<script src="angular/angular.js"></script>
+<link href="bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="bootstrap-3.3.5-dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+<script src="controller/indexController.js"></script>
+<style>
+    .odd {
+        background-color: #a6e1ec
+    }
+
+    .even {
+        background-color: #dca7a7
+    }
+
+    tr.Red {
+        background-color: red
+    }
+
+    tr.Green {
+        background-color: green
+    }
+
+    tr.Blue {
+        background-color: blue
+    }
+</style>
+<body>
+<div id="todoPanel" ng-controller="defaultCtrl" class="panel">
+    <h3 class="panel-header">To Do List </h3>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Action</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--ng-if是移除该DOM ng-show是隐藏-->
+        <!--ng-repeat="item in todos|fiflter;{complete:'false'}"-->
+        <tr ng-repeat="item in todos" ng-if="item.complete" ng-cloak>
+            <td>{{$index+1}}</td>
+            <td ng-repeat="prop in item">
+                {{prop}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="well row">
+        <div class="col-lg-6" ng-repeat="(key,val) in settings">
+            <h4>{{key}}</h4>
+
+            <div class="radio" ng-repeat="button in buttonName">
+                <label>
+                    <input type="radio" ng-model="settings[key]" value="{{button}}">{{button}}
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <table class="table">
+        <thead>
+        <th>#</th>
+        <th>Action</th>
+        <th>Done</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in todos" ng-class="settings.Rows">
+            <td>{{$index+1}}</td>
+            <td>{{item.action}}</td>
+            <td ng-style="{'background-color':settings.Columns}">{{item.complete}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="button" value="click console" ng-click="clickAlert($event)">
+</div>
+</body>
+</html>
